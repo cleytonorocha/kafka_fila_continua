@@ -1,0 +1,29 @@
+# ──────────────────────────────────────────────────────────────
+# Docker profile: PostgreSQL + Kafka inside Docker network
+# Activated via SPRING_PROFILES_ACTIVE=docker
+# ──────────────────────────────────────────────────────────────
+
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/taskdb
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  h2:
+    console:
+      enabled: false
+
+  kafka:
+    bootstrap-servers: kafka:29092
+
+# Random port to avoid conflicts when scaling multiple containers
+server:
+  port: 8080
